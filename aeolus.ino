@@ -16,9 +16,9 @@ MQ135 gasSensor = MQ135(mq135Pin);
 
 const int temperature = 1;
 const int humidity = 1;
-const int ir = 0;
+const int ir = 1;
 const int voc = 1;
-const int hp_control = 0;
+const int hp_control = 1;
 
 String APIkey;
 String password;
@@ -30,6 +30,7 @@ void setup() {
   Serial.begin(9600);
   pinMode(LED, OUTPUT);
   pinMode(relay, OUTPUT);
+  digitalWrite(relay, HIGH);
   Serial.println(password);
   Serial.println(ssid);
   
@@ -216,12 +217,12 @@ void loop() {
                        }
                         if (hp_control == 1 && status_c1 == "on")   //BEGIN EDIT
                         {
-                          digitalWrite(relay, HIGH);
+                          digitalWrite(relay, LOW);
                           Serial.println(digitalRead(relay));
                         }
                         else
                         {
-                          digitalWrite(relay, LOW);
+                          digitalWrite(relay, HIGH);
                         }
                         if (ir == 1 && status_ir1 == "on")
                         {
